@@ -1,5 +1,47 @@
-$corPrincipal: rgb(233, 38, 38);
+$corPrincipal: rgb(255, 184, 231);
+$corSegundaria: #d94f70;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body{
+    font-family: sans-serif;
     background-color: $corPrincipal;
 }
+
+.navbar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 60px;
+    height: 60px;
+    background-color: $corSegundaria;
+
+    h1{
+        color: white;
+        font-family: sans-serif;
+        font-size: 24px;
+    }
+
+}
+
+
+main {
+
+    section{
+
+        max-width: 900px; // define o tamanho máximo que ela ocupa
+        width: 100%;      // ocupa 100% até esse limite
+        margin: 40px auto; // centraliza horizontalmente e dá espaçamento vertical
+        padding: 20px;
+        background-color: #fefefe; // opcional, só pra destacar
+        border-radius: 8px;        // bordas levemente arredondadas (opcional)
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); // sombra leve (opcional)
+    }
+}
+
+
+
+
