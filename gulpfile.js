@@ -10,7 +10,7 @@ const newer = require('gulp-newer');
 function styles() {
     return gulp.src('./src/styles/**/*.scss')
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-        .pipe(gulp.dest('./build/styles'));
+        .pipe(gulp.dest('./dist/styles'));
 }
 
 // =========================
@@ -18,8 +18,8 @@ function styles() {
 // =========================
 function images() {
     return gulp.src('./src/images/**/*.*') // pega qualquer arquivo
-        .pipe(newer('./build/images'))
-        .pipe(gulp.dest('./build/images'));
+        .pipe(newer('./dist/images'))
+        .pipe(gulp.dest('./dist/images'));
 }
 
 // =========================
