@@ -1,17 +1,39 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
+const newer = require('gulp-newer');
 
-// Função pra compilar o SCSS
+
+
+// =========================
+// Task de CSS (SASS)
+// =========================
 function styles() {
-  return gulp.src('./src/styles/**/*.scss') // pega todos scss dentro da pasta
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(gulp.dest('./build/styles'));
+    return gulp.src('./src/styles/**/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./build/styles'));
 }
 
-// Task default (executa só uma vez)
-exports.default = styles;
+// =========================
+// Task de Imagens
+// =========================
+function images() {
+    return gulp.src('./src/images/**/*.*') // pega qualquer arquivo
+        .pipe(newer('./build/images'))
+        .pipe(gulp.dest('./build/images'));
+}
 
-// Task de watch (fica observando mudanças)
-exports.watch = function() {
-    gulp.watch('./src/styles/**/*.scss', gulp.parallel(styles));
-};
+// =========================
+// Task de Watch
+// =========================
+function watch() {
+    gulp.watch('./src/styles/**/*.scss', styles);
+    gulp.watch('./src/images/**/*.*', images);
+}
+
+// =========================
+// Exports
+// =========================
+exports.styles = styles;
+exports.images = images;
+exports.watch = watch;
+exports.default = gulp.parallel(styles, images);
