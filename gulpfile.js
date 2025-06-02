@@ -2,8 +2,6 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const newer = require('gulp-newer');
 
-
-
 // =========================
 // Task de CSS (SASS)
 // =========================
@@ -17,9 +15,17 @@ function styles() {
 // Task de Imagens
 // =========================
 function images() {
-    return gulp.src('./src/images/**/*.*') // pega qualquer arquivo
+    return gulp.src('./src/images/**/*.*')
         .pipe(newer('./dist/images'))
         .pipe(gulp.dest('./dist/images'));
+}
+
+// =========================
+// Task de HTML
+// =========================
+function html() {
+    return gulp.src('./src/**/*.html')
+        .pipe(gulp.dest('./dist'));
 }
 
 // =========================
@@ -28,6 +34,7 @@ function images() {
 function watch() {
     gulp.watch('./src/styles/**/*.scss', styles);
     gulp.watch('./src/images/**/*.*', images);
+    gulp.watch('./src/**/*.html', html);
 }
 
 // =========================
@@ -35,5 +42,7 @@ function watch() {
 // =========================
 exports.styles = styles;
 exports.images = images;
+exports.html = html;
 exports.watch = watch;
-exports.default = gulp.parallel(styles, images);
+exports.build = gulp.parallel(styles, images, html);
+exports.default = exports.build;
